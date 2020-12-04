@@ -18,6 +18,7 @@ function init(){
         barPlot(name_id[0]);
         bubblePlot(name_id[0]);
         demographicInfo(name_id[0]);
+        washingGuage(name_id[0]);
     });
 }
 
@@ -51,14 +52,30 @@ function barPlot(id){
             text: topTenSelectLabels,
             type:'bar',
             orientation: 'h',
+            marker:{
+                color:'#ffcdf8'                
+                }
         };
 
         var data = [trace];
 
         var layout = {
             title: "Top Ten OTU Identifications",
-            xaxis: { title: "Operational Taxonomic Units"},
-            yaxis: { title: "Frequency"}
+            xaxis: { 
+                title: "Operational Taxonomic Units",
+                gridcolor:'white',
+                zerolinecolor:'white',
+                },
+            yaxis: { 
+                title: "Frequency",
+                gridcolor:'white',
+                zerolinecolor:'white'    
+            },
+            paper_bgcolor:'black',
+            plot_bgcolor:'black',
+            font:{
+                color:'white'
+            }
           };
         // Creating a Bar plot of the data that has been filtered
         Plotly.newPlot("bar", data, layout);
@@ -98,16 +115,33 @@ function bubblePlot(id){
             mode:'markers',
             marker: {
                 size: topTenSelectSampleValue,
-                color: topTenSelectID
+                color: topTenSelectID,
+                colorscale:[[0, '#00ff37'], [0.25, '#ffdbf6'], [0.45, '#ff70db'], [0.65, '#828282'], [0.85, '#ff00cc'], [1, '#00fbff']]
             },
-            text: topTenSelectLabels
+            text: topTenSelectLabels,
+            
 
         };
 
         var bubbleLayout = {
-            xaxis:{title: "OTU ID"},
+            xaxis:{
+                title: "OTU ID",
+                gridcolor:'white',
+                zerolinecolor:'white'},
+            yaxis:{
+                gridcolor:'white',
+                zerolinecolor:'white',
+            },
             height: 600,
-            width: 1300
+            width: 1300,
+            paper_bgcolor:'black',
+            plot_bgcolor:'black',
+            font:{
+                color:'white'
+            }
+            
+            
+
         };
 
         var bubbleData = [bubbleTrace];
@@ -139,9 +173,77 @@ function demographicInfo(id){
         .enter()
         .append('h5')
         .html(function(d){
-            return `<h5>ID: ${d.id}</h5><h5>Ethnicity: ${d.ethnicity}</h5><h5>Gender: ${d.gender}</h5><h5>Age: ${d.age}</h5><h5>Location: ${d.location}</h5>`
+            return `<h5>ID: ${d.id}</h5><h5>Ethnicity: ${d.ethnicity}</h5><h5>Gender: ${d.gender}</h5><h5>Age: ${d.age}</h5><h5>Location: ${d.location}</h5><h5>Wash Frequency: ${d.wfreq}</h5>`
         });     
     
+    })
+}
+// BONUS SECTION //
+function washingGuage(id){
+    // reading the json file
+    d3.json("data/samples.json").then(function(wash){
+        console.log('Wash')
+        console.log(wash);
+
+        // Checking to see if the Metadata can be extracted
+        console.log(wash.metadata);
+        
+        // Filtering the data based on selected ID
+        let selectedID = wash.metadata.filter(metadataID => metadataID.id == id);
+        console.log(selectedID);
+
+        // Creating a variable for wash frequency
+        let wfreq = selectedID[0].wfreq;
+        console.log(wfreq);
+
+        // Creating the guage Meter
+        var data = [
+            {
+              domain: { x: [0, 1], y: [0, 1] },
+              value: wfreq,
+              title: { text: "Washing Frequency" },
+              type: "indicator",
+              mode: "gauge+number+delta",
+              delta: { reference: 9 },
+              gauge: {
+                axis: { range: [null, 9] },
+                bar: { color: "#00eeff" },
+                steps: [
+                  { range: [0, 1], color: "#ffe8fc" },
+                  { range: [1, 2], color: "#ffb5f5" },
+                  { range: [2, 3], color: "#ff82ee" },
+                  { range: [3, 4], color: "#ff54e8" },
+                  { range: [4, 5], color: "#ff29e2" },
+                  { range: [5, 6], color: "#d900bb" },
+                  { range: [6, 7], color: "#b5009c" },
+                  { range: [7, 8], color: "#a3008d" },
+                  { range: [8, 9], color: "#8c0079" },
+                  
+                ],
+                threshold: {
+                  line: { color: "white", width: 10 },
+                  thickness: 0.75,
+                  value: 490
+                }
+              }
+            }
+          ];
+          
+          var layout = {width: 500, 
+                height: 450, 
+                margin: { t: 0, b: 0 },
+                paper_bgcolor:'black',
+                plot_bgcolor:'black',
+                font:{
+                color:'white'
+                }             
+                        
+       };
+          Plotly.newPlot('gauge', data, layout);
+
+
+
+
     })
 }
 
@@ -156,5 +258,6 @@ function changedID() {
   barPlot(chosenID);
   bubblePlot(chosenID);
   demographicInfo(chosenID);
+  washingGuage(chosenID);
 }
 init();

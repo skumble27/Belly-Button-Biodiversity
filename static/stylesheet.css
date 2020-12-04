@@ -1,0 +1,38 @@
+body{
+    background-color: black;
+}
+
+.colorformat{
+    background-color:#ff42e5;
+    color: white;
+}
+
+.col1{
+    color: white;
+    background-color: black;
+}
+
+.col1 h1{
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.col2{
+    background-color:#ffcdf8;
+}
+
+.panelBanner{
+    background:#ffcdf8;
+    border-radius: 2.5px;
+    
+    padding: 15px;
+}
+.panelBody{
+    background-color: black;
+    color: white;
+    border-radius: 2.5px;
+    border-color: white;
+    padding: 15px;
+    border-style: solid;
+    border-color: wheat;
+}
