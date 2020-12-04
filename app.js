@@ -7,6 +7,7 @@ function init(){
         var id_menu_dropdown = d3.select('#selDataset');
 
         console.log(name_id);
+        
 
         // Within the dropdown menu, we will need to append the entire list of identificaiton numbers
         name_id.forEach(function(id){
@@ -16,6 +17,7 @@ function init(){
         // Providing a plot for the initial Data Identification Number
         barPlot(name_id[0]);
         bubblePlot(name_id[0]);
+        demographicInfo(name_id[0]);
     });
 }
 
@@ -115,6 +117,45 @@ function bubblePlot(id){
     })
 }
 
+function demographicInfo(id){
+    // read the json file to get data
+    d3.json("data/samples.json").then(function(demographic){
+        console.log(demographic);
+
+        // Checking to see if the Metadata can be extracted
+        console.log(demographic.metadata);
+        
+        // Filtering the data based on selected ID
+        let selectedID = demographic.metadata.filter(metadataID => metadataID.id == id);
+        console.log(selectedID);
+
+        // Emptying the demographic panel
+        let demographicTable = d3.select("#sample-metadata");
+
+        demographicTable.html("");
+
+        demographicTable.selectAll('h5')
+        .data(selectedID)
+        .enter()
+        .append('h5')
+        .html(function(d){
+            return `<h5>ID: ${d.id}</h5><h5>Ethnicity: ${d.ethnicity}</h5><h5>Gender: ${d.gender}</h5><h5>Age: ${d.age}</h5><h5>Location: ${d.location}</h5>`
+        });
+
+
+
+
+
+
+
+        
+    
+
+
+    })
+}
+
+
 
 d3.selectAll("#selDataset").on("change", changedID);
 
@@ -125,5 +166,6 @@ function changedID() {
 
   barPlot(chosenID);
   bubblePlot(chosenID);
+  demographicInfo(chosenID);
 }
 init();
