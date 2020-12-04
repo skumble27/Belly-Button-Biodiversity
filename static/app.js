@@ -140,23 +140,12 @@ function demographicInfo(id){
         .append('h5')
         .html(function(d){
             return `<h5>ID: ${d.id}</h5><h5>Ethnicity: ${d.ethnicity}</h5><h5>Gender: ${d.gender}</h5><h5>Age: ${d.age}</h5><h5>Location: ${d.location}</h5>`
-        });
-
-
-
-
-
-
-
-        
+        });     
     
-
-
     })
 }
 
-
-
+// The syntax below will allows users to select a specific ID to obtain relevant information
 d3.selectAll("#selDataset").on("change", changedID);
 
 function changedID() {
