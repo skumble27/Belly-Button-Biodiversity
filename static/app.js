@@ -133,7 +133,7 @@ function bubblePlot(id){
                 zerolinecolor:'white',
             },
             height: 600,
-            width: 1300,
+            width: 1100,
             paper_bgcolor:'black',
             plot_bgcolor:'black',
             font:{
@@ -173,7 +173,7 @@ function demographicInfo(id){
         .enter()
         .append('h5')
         .html(function(d){
-            return `<h5>ID: ${d.id}</h5><h5>Ethnicity: ${d.ethnicity}</h5><h5>Gender: ${d.gender}</h5><h5>Age: ${d.age}</h5><h5>Location: ${d.location}</h5><h5>Wash Frequency: ${d.wfreq}</h5>`
+            return `<h5>ID: ${d.id}</h5><h5>Gender: ${d.ethnicity}</h5><h5>Gender: ${d.gender}</h5><h5>Age: ${d.age}</h5><h5>Location: ${d.location}</h5><h5>bbtype: ${d.bbtype}</h5><h5>wfreq: ${d.wfreq}</h5>`
         });     
     
     })
