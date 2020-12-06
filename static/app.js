@@ -260,4 +260,7 @@ function changedID() {
   demographicInfo(chosenID);
   washingGuage(chosenID);
 }
+
+
+
 init();
