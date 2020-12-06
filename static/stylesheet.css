@@ -1,10 +1,13 @@
 body{
     background-color: black;
+    font-family: 'Nerko One', cursive;
+    
 }
 
 .colorformat{
     background-color:#ff42e5;
     color: white;
+    
 }
 
 .col1{
@@ -17,8 +20,16 @@ body{
     text-decoration: underline;
 }
 
+.col1 p{
+    font-size: 20px;
+}
+
 .col2{
     background-color:#ffcdf8;
+    font-size: 20px;
+}
+h5{
+    font-size: 16px;
 }
 
 .panelBanner{
@@ -38,5 +49,21 @@ body{
 }
 
 .jumbotron{
-    background-image: url('');
+    background-image: url('https://raw.githubusercontent.com/skumble27/Belly-Button-Biodiversity/main/Images/2BacteriaDiversity.jpg');
+}
+
+footer{
+    background-color:#ffcdf8;
+    padding: 5px;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.reference{
+    color: white;
+    font-size: 20px;
+}
+
+.studysummary{
+    font-size: 20px;
 }
