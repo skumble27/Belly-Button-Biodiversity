@@ -62,12 +62,12 @@ function barPlot(id){
         var layout = {
             title: "Top Ten OTU Identifications",
             xaxis: { 
-                title: "Operational Taxonomic Units",
+                title: "Frequency",
                 gridcolor:'white',
                 zerolinecolor:'white',
                 },
             yaxis: { 
-                title: "Frequency",
+                title: "Operational Taxonomic Units",
                 gridcolor:'white',
                 zerolinecolor:'white'    
             },
@@ -129,6 +129,7 @@ function bubblePlot(id){
                 gridcolor:'white',
                 zerolinecolor:'white'},
             yaxis:{
+                title:"Sample Values",
                 gridcolor:'white',
                 zerolinecolor:'white',
             },
